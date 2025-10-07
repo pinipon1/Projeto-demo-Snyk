@@ -33,6 +33,11 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+      - name: Monitorizar projeto no Snyk
+        run: snyk monitor --file=requirements.txt
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
       - name: Guardar relatório HTML como artefacto
         if: always()  # garante que corre mesmo se o scan falhar
         uses: actions/upload-artifact@v4
