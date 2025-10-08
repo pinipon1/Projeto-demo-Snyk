@@ -29,9 +29,12 @@ jobs:
       - name: Correr Snyk e gerar relatório
         run: |
           snyk test --file=requirements.txt --severity-threshold=high --json > snyk-report.json 
-          snyk-to-html -i snyk-report.json -o snyk-report.html
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Converter relatório em HTML
+        if: always()
+        run: snyk-to-html -i snyk-report.json -o snyk-report.html
 
       - name: Monitorizar projeto no Snyk
         run: snyk monitor --file=requirements.txt
