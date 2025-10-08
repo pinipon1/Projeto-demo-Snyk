@@ -28,7 +28,7 @@ jobs:
 
       - name: Correr Snyk e gerar relatório
         run: |
-          snyk test --file=requirements.txt --json > snyk-report.json || true
+          snyk test --file=requirements.txt --severity-threshold=high --json > snyk-report.json 
           snyk-to-html -i snyk-report.json -o snyk-report.html
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
